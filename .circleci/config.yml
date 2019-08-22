@@ -28,7 +28,9 @@ jobs:
             service apache2 start
       - run: # test what branch we're on.
           name: "Current working directory"
-          command: echo ${PWD}
+          command: |
+            echo ${PWD}
+            ls .
       - run:
           name: "Install Dependencies"
           command: |
