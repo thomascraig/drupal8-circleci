@@ -26,6 +26,9 @@ jobs:
             sleep 20
             mysql -uroot -pHorriblePassword -h127.0.0.1 drupal < ../db/drupal-db-dump.sql
             service apache2 start
+      - run: # test what branch we're on.
+          name: "Current working directory"
+          command: echo ${PWD}
       - run:
           name: "Install Dependencies"
           command: |
