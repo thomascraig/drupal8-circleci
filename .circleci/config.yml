@@ -11,10 +11,10 @@ jobs:
     environment:
       BLUEMIX_ORG: CircleCI
       BLUEMIX_SPACE: dev
-    working_directory: /app
+    working_directory: /project/app
     steps:
       - checkout:
-          path: /app
+          path: /project
       # Run a step to print what branch our code base is on.
       - run: # test what branch we're on.
           name: "Where is sanitized db file?"
