@@ -14,7 +14,7 @@ jobs:
     working_directory: /app
     steps:
       - checkout:
-          path: /
+          path: /app
       # Run a step to print what branch our code base is on.
       - run: # test what branch we're on.
           name: "Where is sanitized db file?"
