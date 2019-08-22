@@ -7,7 +7,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\demo_module\DemoModuleExampleService;
 use Drupal\node\NodeStorageInterface;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests DemoModuleExampleService.
@@ -15,7 +15,7 @@ use Drupal\Tests\UnitTestCase;
  * @group demo_module
  * @coversDefaultClass \Drupal\demo_module\DemoModuleExampleService
  */
-class DemoModuleExampleServiceTest extends UnitTestCase {
+class DemoModuleExampleServiceTest extends TestCase {
 
   /**
    * An instance of DemoModuleExampleService.
