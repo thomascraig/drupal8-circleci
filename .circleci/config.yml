@@ -11,7 +11,7 @@ jobs:
     environment:
       BLUEMIX_ORG: CircleCI
       BLUEMIX_SPACE: dev
-    working_directory: /project/app
+    working_directory: /project/
     steps:
       - checkout:
           path: /project
