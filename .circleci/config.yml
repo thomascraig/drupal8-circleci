@@ -24,7 +24,7 @@ jobs:
           command: |
             echo "127.0.0.1      db" >> /etc/hosts
             sleep 20
-            mysql -uroot -pHorriblePassword -h127.0.0.1 drupal < $DB_DUMP_URL
+            mysql -uroot -pHorriblePassword -h127.0.0.1 drupal < ../db/drupal-db-dump.sql
             service apache2 start
       - run:
           name: "Install Dependencies"
