@@ -15,12 +15,16 @@ jobs:
     steps:
       - checkout:
           path: /project
+      # Run a step to print what branch our code base is on.
+      - run: # test what branch we're on.
+          name: "Where is sanitized db file?"
+          command: echo ${DB_DUMP_URL}
       - run:
           name: "Setup Database & Server"
           command: |
             echo "127.0.0.1      db" >> /etc/hosts
             sleep 20
-            mysql -uroot -pHorriblePassword -h127.0.0.1 drupal < ../db/drupal-db-dump.sql
+            mysql -uroot -pHorriblePassword -h127.0.0.1 drupal < $DB_DUMP_URL
             service apache2 start
       - run:
           name: "Install Dependencies"
