@@ -38,4 +38,6 @@ jobs:
             composer install
       - run:
           name: "Behat Tests"
-          command: vendor/bin/behat
+          command: |
+            cd ..
+            vendor/bin/behat
