@@ -102,10 +102,9 @@ class RoboFile extends \Robo\Tasks
         $tasks[] = $this->taskExec('mysql -u root -h 127.0.0.1 -e "DROP DATABASE IF EXISTS drupal8"');
         $tasks[] = $this->taskExec('mysql -u root -h 127.0.0.1 -e "create database drupal8"');
         $tasks[] = $this->taskFilesystemStack()
-            ->copy('.circleci/config/settings.local.php', 'web/sites/default/settings.local.php', $force);
+            ->copy('.circleci/config/settings.local.php', 'web/sites/default/settings.php', $force);
         $tasks[] = $this->taskExec('wget -O dump.sql ' . getenv('DB_DUMP_URL'));
-        $tasks[] = $this->drush()->rawArg('status');
-        $tasks[] = $this->drush()->rawArg('sql:connect < dump.sql -v')->option('uri', static::SITE_URL, '=');;
+        $tasks[] = $this->drush()->rawArg('sql:cli < dump.sql')->option('uri', static::SITE_URL, '=');
         return $tasks;
     }
 
@@ -120,7 +119,7 @@ class RoboFile extends \Robo\Tasks
     {
         $tasks = [];
         $tasks[] = $this->drush()->args('updatedb')->option('yes')->option('verbose');
-        $tasks[] = $this->drush()->args('config-import')->option('yes')->option('verbose');
+        $tasks[] = $this->drush()->args('config-import -v')->option('yes')->option('verbose');
         return $tasks;
     }
 

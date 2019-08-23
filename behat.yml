@@ -13,5 +13,7 @@ default:
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: "drupal"
+      drush:
+        alias: "local"
       drupal:
-        drupal_root: "html"
+        drupal_root: "/var/www/html/web"
