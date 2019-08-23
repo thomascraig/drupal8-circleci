@@ -104,7 +104,7 @@ class RoboFile extends \Robo\Tasks
             ->copy('.circleci/config/settings.local.php', 'web/sites/default/settings.local.php', $force);
         $tasks[] = $this->taskExec('wget -O dump.sql ' . getenv('DB_DUMP_URL'));
         $tasks[] = $this->drush()->rawArg('status');
-        $tasks[] = $this->drush()->rawArg('sql:cli < /var/www/html/dump.sql -v');
+        $tasks[] = $this->drush()->rawArg('sql:cli < ../dump.sql -v');
         return $tasks;
     }
 
@@ -247,7 +247,7 @@ class RoboFile extends \Robo\Tasks
     protected function drush()
     {
         // Drush needs an absolute path to the docroot.
-        $docroot = $this->getDocroot();
+        $docroot = $this->getDocroot() . '/web';
         return $this->taskExec('vendor/bin/drush')
             ->option('root', $docroot, '=');
     }
