@@ -98,6 +98,7 @@ class RoboFile extends \Robo\Tasks
     {
         $force = true;
         $tasks = [];
+        $tasks[] = $this->taskExec('mysql -u root -h 127.0.0.1 -e "DROP DATABASE IF EXISTS drupal8"');
         $tasks[] = $this->taskExec('mysql -u root -h 127.0.0.1 -e "create database drupal8"');
         $tasks[] = $this->taskFilesystemStack()
             ->copy('.circleci/config/settings.local.php', 'web/sites/default/settings.local.php', $force);
@@ -260,5 +261,4 @@ class RoboFile extends \Robo\Tasks
         $docroot = (getcwd());
         return $docroot;
     }
-
 }
