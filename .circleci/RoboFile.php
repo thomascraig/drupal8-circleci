@@ -19,6 +19,7 @@ class RoboFile extends \Robo\Tasks
      * @var string
      */
     const DB_URL = 'mysql://root@127.0.0.1/drupal8';
+    const SITE_URL = 'http://localhost';
 
     /**
      * Command to run unit tests.
@@ -104,7 +105,7 @@ class RoboFile extends \Robo\Tasks
             ->copy('.circleci/config/settings.local.php', 'web/sites/default/settings.local.php', $force);
         $tasks[] = $this->taskExec('wget -O dump.sql ' . getenv('DB_DUMP_URL'));
         $tasks[] = $this->drush()->rawArg('status');
-        $tasks[] = $this->drush()->rawArg('sql:connect < dump.sql -v');
+        $tasks[] = $this->drush()->rawArg('sql:connect < dump.sql -v')->option('uri', static::SITE_URL, '=');;
         return $tasks;
     }
 
