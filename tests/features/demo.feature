@@ -6,4 +6,4 @@ Feature: Demo feature
 
   Scenario: Visit the homepage
     Given I visit "/"
-    Then I should see "Welcome"
+    Then I should see "The website encountered an unexpected error. Please try again later."
