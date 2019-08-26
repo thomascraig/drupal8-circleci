@@ -138,6 +138,7 @@ class RoboFile extends \Robo\Tasks
         $tasks[] = $this->taskExec('service apache2 start');
         $tasks[] = $this->taskFilesystemStack()
             ->copy('.circleci/config/behat.yml', 'tests/behat.yml', $force);
+            ->mkdir('artifacts/behat', 777);
         $tasks[] = $this->taskExec('vendor/bin/behat --verbose -c tests/behat.yml');
         return $tasks;
     }
