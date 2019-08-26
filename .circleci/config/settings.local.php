@@ -1,5 +1,7 @@
 <?php
 
+if (file_exists('salt.txt')) $settings['hash_salt'] = file_get_contents('/app/salt.txt');
+
 $config_directories['sync'] = '../config/sync';
 
 $databases['default']['default'] = array(
