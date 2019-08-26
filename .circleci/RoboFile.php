@@ -18,7 +18,7 @@ class RoboFile extends \Robo\Tasks
      *
      * @var string
      */
-    const DB_URL = 'mysql://root@127.0.0.1/drupal';
+    const DB_URL = 'mysql://root@127.0.0.1/drupal8';
     const SITE_URL = 'http://localhost';
 
     /**
@@ -99,8 +99,8 @@ class RoboFile extends \Robo\Tasks
     {
         $force = true;
         $tasks = [];
-        $tasks[] = $this->taskExec('mysql -u root -h 127.0.0.1 -e "DROP DATABASE IF EXISTS drupal"');
-        $tasks[] = $this->taskExec('mysql -u root -h 127.0.0.1 -e "create database drupal"');
+        $tasks[] = $this->taskExec('mysql -u root -h 127.0.0.1 -e "DROP DATABASE IF EXISTS drupal8"');
+        $tasks[] = $this->taskExec('mysql -u root -h 127.0.0.1 -e "create database drupal8"');
         $tasks[] = $this->taskFilesystemStack()
             ->copy('.circleci/config/settings.local.php', 'web/sites/default/settings.php', $force);
         #$tasks[] = $this->taskExec('wget -O dump.sql ' . getenv('DB_DUMP_URL'));
