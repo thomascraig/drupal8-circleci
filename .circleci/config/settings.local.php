@@ -1,6 +1,6 @@
 <?php
 
-if (file_exists('salt.txt')) $settings['hash_salt'] = file_get_contents('/app/salt.txt');
+if (file_exists('/app/salt.txt')) $settings['hash_salt'] = file_get_contents('/app/salt.txt');
 
 $config_directories['sync'] = '../config/sync';
 
