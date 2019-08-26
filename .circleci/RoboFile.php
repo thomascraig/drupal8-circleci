@@ -99,12 +99,11 @@ class RoboFile extends \Robo\Tasks
     {
         $force = true;
         $tasks = [];
-        $tasks[] = $this->taskExec('mysql -u root -h 127.0.0.1 -e "DROP DATABASE IF EXISTS drupal8"');
-        $tasks[] = $this->taskExec('mysql -u root -h 127.0.0.1 -e "create database drupal8"');
+        $tasks[] = $this->taskExec('mysql -u root -h 127.0.0.1 -e "DROP DATABASE IF EXISTS drupal"');
+        $tasks[] = $this->taskExec('mysql -u root -h 127.0.0.1 -e "create database drupal"');
         $tasks[] = $this->taskFilesystemStack()
             ->copy('.circleci/config/settings.local.php', 'web/sites/default/settings.php', $force);
-        #$tasks[] = $this->taskExec('wget -O dump.sql ' . getenv('DB_DUMP_URL'));
-        $tasks[] = $this->taskExec('wget -O dump.sql ' . getenv('DB_DUMP_TEST'));
+        $tasks[] = $this->taskExec('wget -O dump.sql ' . getenv('DB_DUMP_URL'));
         $tasks[] = $this->drush()->rawArg('sql:cli < dump.sql')->option('uri', static::SITE_URL, '=');
         return $tasks;
     }

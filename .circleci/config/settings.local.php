@@ -3,7 +3,7 @@
 $config_directories['sync'] = '../config/sync';
 
 $databases['default']['default'] = array(
-  'database' => 'drupal8',
+  'database' => 'drupal',
   'username' => 'root',
   'password' => '',
   'prefix' => '',
