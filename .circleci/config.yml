@@ -43,15 +43,7 @@ unit_kernel_tests: &unit_kernel_tests
   steps:
     - run:
         name: Creating Dummy Artifacts
-        command: |
-          echo "my artifact file" > /tmp/artifact-1;
-          mkdir /tmp/artifacts;
-          echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
-    - store_artifacts:
-        path: /tmp/artifact-1
-        destination: artifact-file
-    - store_artifacts:
-        path: /tmp/artifacts
+        command: mkdir /tmp/artifacts;
     - checkout
     - *copy_robo
     - restore_cache: *restore_cache
@@ -59,15 +51,18 @@ unit_kernel_tests: &unit_kernel_tests
         name: Run PHPUnit tests
         command: robo job:run-unit-tests
     - store_test_results:
-        path: /var/www/html/artifacts/phpunit
+        path: /tmp/artifacts/phpunit
     - store_artifacts:
-        path: /var/www/html/artifacts
+        path: /tmp/artifacts
     - save_cache: *save_cache
 
 ## Job to run the update path and Behat tests.
 behat_tests: &behat_tests
   <<: *defaults
   steps:
+    - run:
+        name: Creating Dummy Artifacts
+        command: mkdir /tmp/artifacts;
     - checkout
     - *copy_robo
     - restore_cache: *restore_cache
@@ -76,9 +71,9 @@ behat_tests: &behat_tests
         command: robo job:run-behat-tests
     - save_cache: *save_cache
     - store_test_results:
-        path: /var/www/html/artifacts/behat
+        path: /tmp/artifacts/behat
     - store_artifacts:
-        path: /var/www/html/artifacts
+        path: /tmp/artifacts
 
 ## Job to check coding standards.
 code_sniffer: &code_sniffer
