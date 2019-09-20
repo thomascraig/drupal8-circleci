@@ -16,3 +16,11 @@ Feature: Demo feature
     Given I am logged in as a user with the "administrator" role
     When I go to "node/add/page"
     Then I should not see "Access denied"
+
+  Scenario: An administrator should be able to edit page content
+    Given "page" nodes:
+      | title      | body          | status  |
+      | Test page  | test content  | 1       |
+    When I go to "admin/content"
+    And I click "edit" in the "Test page" row
+    Then I should not see "Access denied"
